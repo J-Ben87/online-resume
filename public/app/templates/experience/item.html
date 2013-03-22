@@ -1,0 +1,19 @@
+<h3>{{position}} <small class="pull-right date">{{started_on}} to {{ended_on}}</small></h3>
+<h4>
+  {{#if project_website}}<a href="{{project_website}}">{{project}}</a>{{else}}{{project}}{{/if}}
+  {{#if has_separator}}-{{/if}}
+  {{#if company_website}}<a href="{{company_website}}">{{company}}</a>{{else}}{{company}}{{/if}}
+</h4>
+
+{{#each keywords}}
+  <p class="label label-info">{{label}}</p>
+{{/each}}
+
+<p>{{description}}</p>
+
+<hr>
+
+<button id="edit" class="btn btn-info">Edit</button>
+<button id="delete" class="btn btn-danger">Delete</button>
+
+<div id="form-container"></div>

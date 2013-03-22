@@ -1,0 +1,86 @@
+define([
+  "app",
+  "modules/experience",
+  "modules/education"
+],
+
+function(app, Experience, Education) {
+
+  var Router = Backbone.Router.extend({
+
+    routes: {
+      "": "index",
+      "admin/experiences": "experiences",
+      "admin/educations": "educations"
+    },
+
+    index: function() {
+
+    },
+
+    experiences: function() {
+      this.reset("experiences");
+
+      app.useLayout("admin-layout").setViews({
+        "#content": new Experience.Views.List({ collection: this.Collections.experiences })
+      }).render();
+
+      this.Collections.experiences.fetch();
+    },
+
+    educations: function() {
+      this.reset("educations");
+
+      app.useLayout("admin-layout").setViews({
+        "#content": new Education.Views.List({ collection: this.Collections.educations })
+      }).render();
+
+      this.Collections.educations.fetch();
+    },
+
+    reset: function(route) {
+      if (this.Collections.experiences.length) {
+        this.Collections.experiences.reset();
+      }
+
+      if (this.Collections.educations.length) {
+        this.Collections.educations.reset();
+      }
+
+      if (app.layout) {
+        app.layout.getViews().each(function(view) {
+          view.remove();
+        });
+      }
+
+      this.routes.active = route;
+    },
+
+    initialize: function() {
+      this.Collections = {
+        experiences: new Experience.Collection(),
+        educations: new Education.Collection()
+      };
+
+      app.Models = {
+        Experience: Experience.Model,
+        Education: Education.Model
+      };
+
+      app.Collections = {
+        Experiences: Experience.Collection,
+        Educations: Education.Collection
+      };
+
+      var self = this;
+      Handlebars.registerHelper("is_active", function(route, options) {
+        if (self.routes.active == route) {
+          return options.fn(this);
+        }
+      });
+    }
+
+  });
+
+  return Router;
+});

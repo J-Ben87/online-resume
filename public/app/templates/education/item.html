@@ -1,0 +1,19 @@
+<h3>{{title}} <small class="pull-right date">{{started_on}} to {{ended_on}}</small></h3>
+<h4>
+  {{#if website}}<a href="{{website}}">{{school}}</a>{{else}}{{school}}{{/if}}
+  {{#if has_separator}}-{{/if}}
+  {{location}}
+</h4>
+
+{{#each keywords}}
+  <p class="label label-success">{{label}}</p>
+{{/each}}
+
+<p>{{description}}</p>
+
+<hr>
+
+<button id="edit" class="btn btn-info">Edit</button>
+<button id="delete" class="btn btn-danger">Delete</button>
+
+<div id="form-container"></div>

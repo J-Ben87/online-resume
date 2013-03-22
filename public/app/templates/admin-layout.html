@@ -1,0 +1,27 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <a class="brand" href="/admin">Administration Panel</a>
+
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li{{#is_active "experiences"}} class="active"{{/is_active}}><a href="/admin/experiences">Experiences</a></li>
+          <li{{#is_active "educations"}} class="active"{{/is_active}}><a href="/admin/educations">Educations</a></li>
+          <li{{#is_active "languages"}} class="active"{{/is_active}}><a href="/admin/languages">Languages</a></li>
+          <li{{#is_active "hobbies"}} class="active"{{/is_active}}><a href="/admin/hobbies">Hobbies</a></li>
+          <li{{#is_active "settings"}} class="active"{{/is_active}}><a href="/admin/settings">Settings</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="content" class="container"></div>
