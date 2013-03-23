@@ -20,7 +20,7 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
-mongoose.connect('mongodb://localhost/cv');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/cv');
 
 models.initialize(app, mongoose);
 routes.initialize(app);
