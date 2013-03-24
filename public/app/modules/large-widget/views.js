@@ -156,6 +156,15 @@ function(app) {
       e.preventDefault();
 
       this.remove();
+    },
+
+    afterRender: function() {
+      _.each(this.$(".datepicker"), function(datepicker) {
+        var $datepicker = $(datepicker);
+        var datepicker = $datepicker.datepicker().on("changeDate", function() {
+          datepicker.hide();
+        }).data("datepicker");
+      });
     }
   });
 

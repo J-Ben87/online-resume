@@ -76,10 +76,6 @@ function(app, AbstractViews) {
       return values;
     },
 
-    afterRender: function() {
-      this.$(".datepicker").datepicker();
-    },
-
     initialize: function() {
       this.model = this.model || new app.Models.Experience();
     }
