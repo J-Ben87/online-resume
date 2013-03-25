@@ -4,15 +4,12 @@
 
   exports.initialize = function(app, mongoose) {
 
-    var KeywordSchema = require('./schemas/keyword')(mongoose)
-      , ExperienceSchema = require('./schemas/experience')(mongoose, KeywordSchema)
-      , EducationSchema  = require('./schemas/education')(mongoose, KeywordSchema);
+    app.Models = {};
 
-    app.Models = {
-      Keyword:    mongoose.model('Keyword', KeywordSchema),
-      Experience: mongoose.model('Experience', ExperienceSchema),
-      Education:  mongoose.model('Education', EducationSchema)
-    }
+    app.Models.Keyword =    require('./keyword')(app, mongoose),
+    app.Models.Experience = require('./experience')(app, mongoose),
+    app.Models.Education =  require('./education')(app, mongoose),
+    app.Models.User =       require('./user')(app, mongoose)
 
   };
 

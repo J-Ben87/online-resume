@@ -7,11 +7,11 @@
     var view = 'index.html'
       , root = '/admin/';
 
-    app.get(root + 'educations', function(req, res) {
+    app.get(root + 'experiences', function(req, res) {
       res.render(view);
     });
 
-    app.get(root + 'experiences', function(req, res) {
+    app.get(root + 'educations', function(req, res) {
       res.render(view);
     });
 
