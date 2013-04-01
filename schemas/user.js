@@ -7,7 +7,7 @@
     return new mongoose.Schema({
       email: String,
       password: String,
-      token: String
+      access_token: String
     });
 
   };

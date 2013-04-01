@@ -2,7 +2,7 @@
 
   "use strict";
 
-  module.exports = function(app) {
+  module.exports = function(app, passport) {
 
     var ExperienceModel = app.Models.Experience;
 
@@ -26,7 +26,7 @@
       });
     });
 
-    app.post('/api/experiences', function(req, res) {
+    app.post('/api/experiences', passport.authenticate('bearer', { session: false }), function(req, res) {
       var experience = new ExperienceModel({
         position: req.body.position,
         started_on: req.body.started_on,
@@ -51,7 +51,7 @@
       return res.send(experience);
     });
 
-    app.put('/api/experiences/:id', function(req, res) {
+    app.put('/api/experiences/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return ExperienceModel.findById(req.params.id, function(err, experience) {
         experience.position = req.body.position;
         experience.started_on = req.body.started_on;
@@ -76,7 +76,7 @@
       });
     });
 
-    app.delete('/api/experiences/:id', function(req, res) {
+    app.delete('/api/experiences/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return ExperienceModel.findById(req.params.id, function(err, experience) {
         return experience.remove(function(err) {
           if (!err) {

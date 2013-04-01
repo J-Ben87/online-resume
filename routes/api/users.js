@@ -2,11 +2,11 @@
 
   "use strict";
 
-  module.exports = function(app) {
+  module.exports = function(app, passport) {
 
     var UserModel = app.Models.User;
 
-    app.get('/api/users', function(req, res) {
+    app.get('/api/users', passport.authenticate('bearer', { session: false }), function(req, res) {
       return UserModel.find(function(err, users) {
         if (!err) {
           return res.send(users);
@@ -16,7 +16,7 @@
       });
     });
 
-    app.get('/api/users/:id', function(req, res) {
+    app.get('/api/users/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return UserModel.findById(req.params.id, function(err, user) {
         if (!err) {
           return res.send(user);
@@ -26,11 +26,11 @@
       });
     });
 
-    app.post('/api/users', function(req, res) {
+    app.post('/api/users', passport.authenticate('bearer', { session: false }), function(req, res) {
       var user = new UserModel({
         email: req.body.email,
         password: req.body.password,
-        token: req.body.token
+        access_token: req.body.access_token
       });
 
       user.save(function(err) {
@@ -44,11 +44,11 @@
       return res.send(user);
     });
 
-    app.put('/api/users/:id', function(req, res) {
+    app.put('/api/users/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return UserModel.findById(req.params.id, function(err, user) {
         user.email = req.body.email;
         user.password = req.body.password;
-        user.token = req.body.token;
+        user.access_token = req.body.access_token;
 
         return user.save(function(err) {
           if (!err) {
@@ -62,7 +62,7 @@
       });
     });
 
-    app.delete('/api/users/:id', function(req, res) {
+    app.delete('/api/users/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return UserModel.findById(req.params.id, function(err, user) {
         return user.remove(function(err) {
           if (!err) {

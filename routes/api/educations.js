@@ -2,7 +2,7 @@
 
   "use strict";
 
-  module.exports = function(app) {
+  module.exports = function(app, passport) {
 
     var EducationModel = app.Models.Education;
 
@@ -26,7 +26,7 @@
       });
     });
 
-    app.post('/api/educations', function(req, res) {
+    app.post('/api/educations', passport.authenticate('bearer', { session: false }), function(req, res) {
       var education = new EducationModel({
         title: req.body.title,
         started_on: req.body.started_on,
@@ -50,7 +50,7 @@
       return res.send(education);
     });
 
-    app.put('/api/educations/:id', function(req, res) {
+    app.put('/api/educations/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return EducationModel.findById(req.params.id, function(err, education) {
         education.title = req.body.title;
         education.started_on = req.body.started_on;
@@ -74,7 +74,7 @@
       });
     });
 
-    app.delete('/api/educations/:id', function(req, res) {
+    app.delete('/api/educations/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return EducationModel.findById(req.params.id, function(err, education) {
         return education.remove(function(err) {
           if (!err) {
