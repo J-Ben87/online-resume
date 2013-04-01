@@ -1,17 +1,19 @@
 define([
   "app",
   "modules/experience",
-  "modules/education"
+  "modules/education",
+  "modules/user"
 ],
 
-function(app, Experience, Education) {
+function(app, Experience, Education, User) {
 
   var Router = Backbone.Router.extend({
 
     routes: {
       "": "index",
       "admin/experiences": "experiences",
-      "admin/educations": "educations"
+      "admin/educations": "educations",
+      "admin/login": "login"
     },
 
     index: function() {
@@ -20,6 +22,10 @@ function(app, Experience, Education) {
 
     experiences: function() {
       this.reset("experiences");
+
+      if (!app.user.isAuthenticated()) {
+        return this.navigate("admin/login", true);
+      }
 
       app.useLayout("admin-layout").setViews({
         "#content": new Experience.Views.List({ collection: this.Collections.experiences })
@@ -31,11 +37,23 @@ function(app, Experience, Education) {
     educations: function() {
       this.reset("educations");
 
+      if (!app.user.isAuthenticated()) {
+        return this.navigate("admin/login", true);
+      }
+
       app.useLayout("admin-layout").setViews({
         "#content": new Education.Views.List({ collection: this.Collections.educations })
       }).render();
 
       this.Collections.educations.fetch();
+    },
+
+    login: function() {
+      this.reset();
+
+      app.useLayout("admin-layout").setViews({
+        "#content": new User.Views.Login()
+      }).render();
     },
 
     reset: function(route) {
@@ -64,7 +82,8 @@ function(app, Experience, Education) {
 
       app.Models = {
         Experience: Experience.Model,
-        Education: Education.Model
+        Education: Education.Model,
+        User: User.Model
       };
 
       app.Collections = {

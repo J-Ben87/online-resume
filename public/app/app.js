@@ -18,8 +18,27 @@ function() {
     return (first < last ? this >= first && this <= last : this <= first && this >= last);
   };
 
+  var _sync = Backbone.sync;
+  Backbone.sync = function(method, model, options) {
+    options.data = options.data || {};
+
+    if (model && (method === "create" || method === "update" || method === "patch")) {
+      options.contentType = "application/json";
+      options.data = JSON.stringify(_.extend(options.attrs || model.toJSON(), {
+        "access_token": app.user.access_token
+      }));
+    }
+
+    return _sync.call(this, method, model, options);
+  };
+
   var app = {
-    root: "/"
+    root: "/",
+    user: {
+      isAuthenticated: function() {
+        return this.access_token ? true : false;
+      }
+    }
   };
 
   var JST = window.JST = window.JST || {};

@@ -17,6 +17,6 @@ function(app, Router) {
 
       Backbone.history.navigate(href.attr, true);
     }
-  })
+  });
 
 });
