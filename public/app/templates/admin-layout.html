@@ -18,6 +18,12 @@
           <li{{#is_active "hobbies"}} class="active"{{/is_active}}><a href="/admin/hobbies">Hobbies</a></li>
           <li{{#is_active "settings"}} class="active"{{/is_active}}><a href="/admin/settings">Settings</a></li>
         </ul>
+
+        {{#is_authenticated}}
+          <ul class="nav pull-right">
+            <li><a href="/admin/logout">Logout</a></li>
+          </ul>
+        {{/is_authenticated}}
       </div>
 
     </div>

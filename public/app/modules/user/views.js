@@ -20,11 +20,8 @@ function(app) {
 
       this.model.set(this.unserialize());
       this.model.fetch({
-        success: function(model, response, options) {
-          app.user.access_token = model.get("access_token");
-          app.router.navigate("admin/educations", { trigger: true });
-        },
-        error: function(model, response) {
+        success: function() {
+          app.trigger("user:login");
         }
       });
     },
@@ -34,10 +31,6 @@ function(app) {
         email: this.$("#email").val(),
         password: this.$("#password").val()
       };
-    },
-
-    initialize: function() {
-      this.model = new app.Models.User();
     }
   });
 

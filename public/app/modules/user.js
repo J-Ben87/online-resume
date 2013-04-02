@@ -12,6 +12,19 @@ function(app, Views) {
 
     url: function() {
       return "/api/users/" + this.get("email") + "/" + this.get("password");
+    },
+
+    login: function() {
+      return app.router.navigate("admin/educations", { trigger: true });
+    },
+
+    logout: function() {
+      this.clear();
+      return app.router.navigate("admin/login", { trigger: true });
+    },
+
+    isAuthenticated: function() {
+      return this.get("access_token") ? true : false;
     }
   });
 

@@ -33,12 +33,7 @@ function() {
   };
 
   var app = {
-    root: "/",
-    user: {
-      isAuthenticated: function() {
-        return this.access_token ? true : false;
-      }
-    }
+    root: "/"
   };
 
   var JST = window.JST = window.JST || {};

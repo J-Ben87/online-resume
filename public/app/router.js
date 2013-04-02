@@ -13,7 +13,8 @@ function(app, Experience, Education, User) {
       "": "index",
       "admin/experiences": "experiences",
       "admin/educations": "educations",
-      "admin/login": "login"
+      "admin/login": "login",
+      "admin/logout": "logout"
     },
 
     index: function() {
@@ -52,8 +53,13 @@ function(app, Experience, Education, User) {
       this.reset();
 
       app.useLayout("admin-layout").setViews({
-        "#content": new User.Views.Login()
+        "#content": new User.Views.Login({ model: app.user })
       }).render();
+    },
+
+    logout: function() {
+      this.reset();
+      app.trigger("user:logout");
     },
 
     reset: function(route) {
@@ -91,9 +97,19 @@ function(app, Experience, Education, User) {
         Educations: Education.Collection
       };
 
+      app.user = new User.Model();
+      app.on("user:login", app.user.login, app.user);
+      app.on("user:logout", app.user.logout, app.user);
+
       var self = this;
       Handlebars.registerHelper("is_active", function(route, options) {
         if (self.routes.active == route) {
+          return options.fn(this);
+        }
+      });
+
+      Handlebars.registerHelper("is_authenticated", function(options) {
+        if (app.user.isAuthenticated()) {
           return options.fn(this);
         }
       });

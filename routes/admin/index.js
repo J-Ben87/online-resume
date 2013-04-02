@@ -19,6 +19,10 @@
       res.render(view);
     });
 
+    app.get(root + 'logout', function(req, res) {
+      res.render(view);
+    });
+
   };
 
 }());
