@@ -11,7 +11,8 @@ require.config({
     "bootstrap": "../vendor/bootstrap/js/bootstrap.min",
     "bootstrap-datepicker": "../vendor/bootstrap/js/bootstrap-datepicker",
     "handlebars": "../vendor/libs/handlebars",
-    "backbone.layoutmanager": "../vendor/libs/backbone.layoutmanager"
+    "backbone.layoutmanager": "../vendor/libs/backbone.layoutmanager",
+    "backbone.localstorage": "../vendor/libs/backbone.localstorage"
   },
 
   "shim": {
@@ -62,6 +63,14 @@ require.config({
         "backbone"
       ],
       "exports": "Backbone.LayoutManager"
+    },
+
+    "backbone.localstorage": {
+      "deps": [
+        "backbone",
+        "lodash"
+      ],
+      "exports": "Backbone.LocalStorage"
     }
   }
 

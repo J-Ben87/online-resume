@@ -1,6 +1,7 @@
 define([
   "app",
-  "modules/user/views"
+  "modules/user/views",
+  "backbone.localstorage"
 ],
 
 function(app, Views) {
@@ -14,17 +15,56 @@ function(app, Views) {
       return "/api/users/" + this.get("email") + "/" + this.get("password");
     },
 
-    login: function() {
-      return app.router.navigate("admin/educations", { trigger: true });
+    login: function(user) {
+      this.set(user);
+      this.fetch({
+        success: function(model, response, options) {
+          if (app.rememberMe.isNew()) {
+            app.rememberMe.save(model.toJSON());
+          }
+
+          return app.router.navigate(app.router.referer, true);
+        },
+        error: function(model, response, options) {
+          return app.trigger("user:login:error", model);
+        }
+      });
     },
 
     logout: function() {
       this.clear();
-      return app.router.navigate("admin/login", { trigger: true });
+      app.rememberMe.destroy();
+
+      return app.router.navigate("admin/login", true);
     },
 
     isAuthenticated: function() {
-      return this.get("access_token") ? true : false;
+      return (this.get("access_token") ? true : false);
+    },
+
+    initialize: function() {
+      app.on("user:login", this.login, this);
+      app.on("user:logout", this.logout, this);
+    }
+  });
+
+  User.RememberMe = Backbone.Model.extend({
+    idAttribute: "_id",
+    localStorage: new Backbone.LocalStorage("cv-rememberme"),
+
+    parse: function(response, options) {
+      return _.first(response);
+    },
+
+    initialize: function() {
+      var self = this;
+      this.fetch({
+        success: function(model, response, options) {
+          if (!self.isNew()) {
+            app.trigger("user:login", model.toJSON());
+          }
+        }
+      });
     }
   });
 

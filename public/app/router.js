@@ -22,7 +22,7 @@ function(app, Experience, Education, User) {
     },
 
     experiences: function() {
-      this.reset("experiences");
+      this.reset({ route: "experiences", referer: "admin/experiences" });
 
       if (!app.user.isAuthenticated()) {
         return this.navigate("admin/login", true);
@@ -36,7 +36,7 @@ function(app, Experience, Education, User) {
     },
 
     educations: function() {
-      this.reset("educations");
+      this.reset({ route: "educations", referer: "admin/educations" });
 
       if (!app.user.isAuthenticated()) {
         return this.navigate("admin/login", true);
@@ -62,7 +62,17 @@ function(app, Experience, Education, User) {
       app.trigger("user:logout");
     },
 
-    reset: function(route) {
+    reset: function(route, options) {
+      if (_.isObject(route)) {
+        options = route;
+      }
+
+      options = options || {};
+
+      if (_.isString(route)) {
+        options.template = route;
+      }
+
       if (this.Collections.experiences.length) {
         this.Collections.experiences.reset();
       }
@@ -77,7 +87,11 @@ function(app, Experience, Education, User) {
         });
       }
 
-      this.routes.active = route;
+      if (options.referer) {
+        this.referer = options.referer;
+      }
+
+      this.routes.active = options.route;
     },
 
     initialize: function() {
@@ -97,9 +111,10 @@ function(app, Experience, Education, User) {
         Educations: Education.Collection
       };
 
+      this.referer = "admin/educations";
+
       app.user = new User.Model();
-      app.on("user:login", app.user.login, app.user);
-      app.on("user:logout", app.user.logout, app.user);
+      app.rememberMe = new User.RememberMe();
 
       var self = this;
       Handlebars.registerHelper("is_active", function(route, options) {

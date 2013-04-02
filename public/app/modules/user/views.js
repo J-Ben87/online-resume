@@ -18,12 +18,7 @@ function(app) {
     login: function(e) {
       e.preventDefault();
 
-      this.model.set(this.unserialize());
-      this.model.fetch({
-        success: function() {
-          app.trigger("user:login");
-        }
-      });
+      app.trigger("user:login", this.unserialize());
     },
 
     unserialize: function() {
