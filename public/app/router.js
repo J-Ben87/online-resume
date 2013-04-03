@@ -29,10 +29,10 @@ function(app, Experience, Education, User) {
       }
 
       app.useLayout("admin-layout").setViews({
-        "#content": new Experience.Views.List({ collection: this.Collections.experiences })
+        "#content": new Experience.Views.List({ collection: this.collections.experiences })
       }).render();
 
-      this.Collections.experiences.fetch();
+      this.collections.experiences.fetch();
     },
 
     educations: function() {
@@ -43,10 +43,10 @@ function(app, Experience, Education, User) {
       }
 
       app.useLayout("admin-layout").setViews({
-        "#content": new Education.Views.List({ collection: this.Collections.educations })
+        "#content": new Education.Views.List({ collection: this.collections.educations })
       }).render();
 
-      this.Collections.educations.fetch();
+      this.collections.educations.fetch();
     },
 
     login: function() {
@@ -73,12 +73,12 @@ function(app, Experience, Education, User) {
         options.template = route;
       }
 
-      if (this.Collections.experiences.length) {
-        this.Collections.experiences.reset();
+      if (this.collections.experiences.length) {
+        this.collections.experiences.reset();
       }
 
-      if (this.Collections.educations.length) {
-        this.Collections.educations.reset();
+      if (this.collections.educations.length) {
+        this.collections.educations.reset();
       }
 
       if (app.layout) {
@@ -95,20 +95,15 @@ function(app, Experience, Education, User) {
     },
 
     initialize: function() {
-      this.Collections = {
+      this.collections = {
         experiences: new Experience.Collection(),
         educations: new Education.Collection()
       };
 
-      app.Models = {
-        Experience: Experience.Model,
-        Education: Education.Model,
-        User: User.Model
-      };
-
-      app.Collections = {
-        Experiences: Experience.Collection,
-        Educations: Education.Collection
+      app.modules = {
+        Experience: Experience,
+        Education: Education,
+        User: User
       };
 
       this.referer = "admin/educations";

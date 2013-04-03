@@ -61,7 +61,7 @@ function(app, AbstractViews) {
         location: this.$("#location").val(),
         highlights: [],
         description: this.$("#description").val(),
-        order: this.model.get("order") || app.router.Collections.educations.length + 1
+        order: this.model.get("order") || app.router.collections.educations.length + 1
       };
 
       var highlights = this.model.get("highlights");
@@ -75,7 +75,7 @@ function(app, AbstractViews) {
     },
 
     initialize: function() {
-      this.model = this.model || new app.Models.Education();
+      this.model = this.model || new app.modules.Education.Model();
     }
   });
 

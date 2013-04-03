@@ -72,7 +72,7 @@ function(app, AbstractViews) {
         softwares: [],
         tools: [],
         keywords: [],
-        order: this.model.get("order") || app.router.Collections.experiences.length + 1
+        order: this.model.get("order") || app.router.collections.experiences.length + 1
       };
 
       var self = this;
@@ -93,7 +93,7 @@ function(app, AbstractViews) {
     },
 
     initialize: function() {
-      this.model = this.model || new app.Models.Experience();
+      this.model = this.model || new app.modules.Experience.Model();
     }
   });
 
