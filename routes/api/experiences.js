@@ -35,8 +35,13 @@
         project_website: req.body.project_website,
         company: req.body.company,
         company_website: req.body.company_website,
-        keywords: req.body.keywords,
+        highlights: req.body.highlights,
         description: req.body.description,
+        technologies: req.body.technologies,
+        frameworks: req.body.frameworks,
+        softwares: req.body.softwares,
+        tools: req.body.tools,
+        keywords: req.body.keywords,
         order: req.body.order
       });
 
@@ -60,8 +65,13 @@
         experience.project_website = req.body.project_website;
         experience.company = req.body.company;
         experience.company_website = req.body.company_website;
-        experience.keywords = req.body.keywords;
+        experience.highlights = req.body.highlights;
         experience.description = req.body.description;
+        experience.technologies = req.body.technologies;
+        experience.frameworks = req.body.frameworks;
+        experience.softwares = req.body.softwares;
+        experience.tools = req.body.tools;
+        experience.keywords = req.body.keywords;
         experience.order = req.body.order;
 
         return experience.save(function(err) {

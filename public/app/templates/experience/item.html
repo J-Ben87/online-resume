@@ -5,11 +5,68 @@
   {{#if project_website}}<a href="{{project_website}}">{{{project}}}</a>{{else}}{{{project}}}{{/if}}
 </h4>
 
-{{#each keywords}}
+{{#each highlights}}
   <p class="label label-info">{{{label}}}</p>
 {{/each}}
 
 <p>{{{description}}}</p>
+
+<div class="row-fluid details">
+  {{#if technologies}}
+    <div class="span2">
+      <strong>Technologies</strong>
+      <ul class="unstyled dl-like">
+        {{#each technologies}}
+          <li>{{{label}}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{#if frameworks}}
+    <div class="span2">
+      <strong>Frameworks - Libraries</strong>
+      <ul class="unstyled dl-like">
+        {{#each frameworks}}
+          <li>{{{label}}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{#if softwares}}
+    <div class="span2">
+      <strong>Softwares</strong>
+      <ul class="unstyled dl-like">
+        {{#each softwares}}
+          <li>{{{label}}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{#if tools}}
+    <div class="span2">
+      <strong>Tools</strong>
+      <ul class="unstyled dl-like">
+        {{#each tools}}
+          <li>{{{label}}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{#if keywords}}
+    <div class="span2">
+      <strong>Keywords</strong>
+      <ul class="unstyled dl-like">
+        {{#each keywords}}
+          <li><i class="icon-star-empty"></i> {{{label}}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</div>
 
 <hr>
 

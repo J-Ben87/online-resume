@@ -25,7 +25,7 @@ function() {
     if (model && (method === "create" || method === "update" || method === "patch")) {
       options.contentType = "application/json";
       options.data = JSON.stringify(_.extend(options.attrs || model.toJSON(), {
-        "access_token": app.user.access_token
+        "access_token": app.user.get("access_token")
       }));
     }
 

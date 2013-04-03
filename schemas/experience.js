@@ -12,8 +12,13 @@
       project_website: String,
       company: String,
       company_website: String,
-      keywords: [ KeywordSchema ],
+      highlights: [ KeywordSchema ],
       description: String,
+      technologies: [ KeywordSchema ],
+      frameworks: [ KeywordSchema ],
+      softwares: [ KeywordSchema ],
+      tools: [ KeywordSchema ],
+      keywords: [ KeywordSchema ],
       order: Number
     });
 

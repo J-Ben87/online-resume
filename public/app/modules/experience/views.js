@@ -42,11 +42,16 @@ function(app, AbstractViews) {
       values.started_on = (values.started_on ? $.format.date(new Date(values.started_on), "yyyy-MM") : "");
       values.ended_on = (values.ended_on ? $.format.date(new Date(values.ended_on), "yyyy-MM") : "");
 
-      var keywords = "";
-      _.each(values.keywords, function(keyword, i) {
-        keywords += (i > 0 ? "\n" : "") + keyword.label;
+      var attributes = ["highlights", "technologies", "frameworks", "softwares", "tools", "keywords"];
+      _.each(attributes, function(attribute) {
+
+        var items = "";
+        _.each(values[attribute], function(item, i) {
+          items += (i > 0 ? "\n" : "") + item.label;
+        });
+        values[attribute] = items;
+
       });
-      values.keywords = keywords;
 
       return values;
     },
@@ -60,17 +65,28 @@ function(app, AbstractViews) {
         project_website: this.$("#project_website").val(),
         company: this.$("#company").val(),
         company_website: this.$("#company_website").val(),
-        keywords: [],
+        highlights: [],
         description: this.$("#description").val(),
+        technologies: [],
+        frameworks: [],
+        softwares: [],
+        tools: [],
+        keywords: [],
         order: this.model.get("order") || app.router.Collections.experiences.length + 1
       };
 
-      var keywords = this.model.get("keywords");
+      var self = this;
 
-      _.each(this.$("#keywords").val().split("\n"), function(label) {
-        values.keywords.push(_.find(keywords, function(keyword) {
-          return keyword.label == label;
-        }) || { label: label, scope: "experience" });
+      var attributes = ["highlights", "technologies", "frameworks", "softwares", "tools", "keywords"];
+      _.each(attributes, function(attribute) {
+
+        var items = self.model.get(attribute);
+        _.each(self.$("#" + attribute).val().split("\n"), function(label) {
+          values[attribute].push(_.find(items, function(item) {
+            return item.label == label;
+          }) || { label: label, scope: "experience" });
+        });
+
       });
 
       return values;

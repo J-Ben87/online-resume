@@ -11,7 +11,7 @@
       school: String,
       website: String,
       location: String,
-      keywords: [ KeywordSchema ],
+      highlights: [ KeywordSchema ],
       description: String,
       order: Number
     });

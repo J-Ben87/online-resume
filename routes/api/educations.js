@@ -34,7 +34,7 @@
         school: req.body.school,
         website: req.body.website,
         location: req.body.location,
-        keywords: req.body.keywords,
+        highlights: req.body.highlights,
         description: req.body.description,
         order: req.body.order
       });
@@ -58,7 +58,7 @@
         education.school = req.body.school;
         education.website = req.body.website;
         education.location = req.body.location;
-        education.keywords = req.body.keywords;
+        education.highlights = req.body.highlights;
         education.description = req.body.description;
         education.order = req.body.order;
 

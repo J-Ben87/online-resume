@@ -42,11 +42,11 @@ function(app, AbstractViews) {
       values.started_on = (values.started_on ? $.format.date(new Date(values.started_on), "yyyy-MM") : "");
       values.ended_on = (values.ended_on ? $.format.date(new Date(values.ended_on), "yyyy-MM") : "");
 
-      var keywords = "";
-      _.each(values.keywords, function(keyword, i) {
-        keywords += (i > 0 ? "\n" : "") + keyword.label;
+      var highlights = "";
+      _.each(values.highlights, function(highlight, i) {
+        highlights += (i > 0 ? "\n" : "") + highlight.label;
       });
-      values.keywords = keywords;
+      values.highlights = highlights;
 
       return values;
     },
@@ -59,16 +59,15 @@ function(app, AbstractViews) {
         school: this.$("#school").val(),
         website: this.$("#website").val(),
         location: this.$("#location").val(),
-        keywords: [],
+        highlights: [],
         description: this.$("#description").val(),
         order: this.model.get("order") || app.router.Collections.educations.length + 1
       };
 
-      var keywords = this.model.get("keywords");
-
-      _.each(this.$("#keywords").val().split("\n"), function(label) {
-        values.keywords.push(_.find(keywords, function(keyword) {
-          return keyword.label == label;
+      var highlights = this.model.get("highlights");
+      _.each(this.$("#highlights").val().split("\n"), function(label) {
+        values.highlights.push(_.find(highlights, function(highlight) {
+          return highlight.label == label;
         }) || { label: label, scope: "education" });
       });
 
