@@ -2,12 +2,19 @@
 
   "use strict";
 
-  module.exports = function(app, mongoose) {
+  module.exports = function(mongoose, KeywordSchema) {
 
-    var KeywordSchema = app.Schemas.Keyword
-      , EducationSchema = app.Schemas.Education;
-
-    return mongoose.model('Education', EducationSchema);
+    return new mongoose.Schema({
+      title: String,
+      started_on: Date,
+      ended_on: Date,
+      school: String,
+      website: String,
+      location: String,
+      highlights: [ KeywordSchema ],
+      description: String,
+      order: Number
+    });
 
   };
 

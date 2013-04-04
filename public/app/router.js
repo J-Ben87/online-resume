@@ -2,10 +2,11 @@ define([
   "app",
   "modules/experience",
   "modules/education",
+  "modules/language",
   "modules/user"
 ],
 
-function(app, Experience, Education, User) {
+function(app, Experience, Education, Language, User) {
 
   var Router = Backbone.Router.extend({
 
@@ -13,6 +14,7 @@ function(app, Experience, Education, User) {
       "": "index",
       "admin/experiences": "experiences",
       "admin/educations": "educations",
+      "admin/languages": "languages",
       "admin/login": "login",
       "admin/logout": "logout"
     },
@@ -49,6 +51,20 @@ function(app, Experience, Education, User) {
       this.collections.educations.fetch();
     },
 
+    languages: function() {
+      this.reset({ route: "languages", referer: "admin/languages" });
+
+      if (!app.user.isAuthenticated()) {
+        return this.navigate("admin/login", true);
+      }
+
+      app.useLayout("admin-layout").setViews({
+        "#content": new Language.Views.List({ collection: this.collections.languages })
+      }).render();
+
+      this.collections.languages.fetch();
+    },
+
     login: function() {
       this.reset();
 
@@ -81,6 +97,10 @@ function(app, Experience, Education, User) {
         this.collections.educations.reset();
       }
 
+      if (this.collections.languages.length) {
+        this.collections.languages.reset();
+      }
+
       if (app.layout) {
         app.layout.getViews().each(function(view) {
           view.remove();
@@ -97,12 +117,14 @@ function(app, Experience, Education, User) {
     initialize: function() {
       this.collections = {
         experiences: new Experience.Collection(),
-        educations: new Education.Collection()
+        educations: new Education.Collection(),
+        languages: new Language.Collection()
       };
 
       app.modules = {
         Experience: Experience,
         Education: Education,
+        Language: Language,
         User: User
       };
 
@@ -128,4 +150,5 @@ function(app, Experience, Education, User) {
   });
 
   return Router;
+
 });

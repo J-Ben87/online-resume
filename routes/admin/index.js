@@ -15,6 +15,10 @@
       res.render(view);
     });
 
+    app.get(root + 'languages', function(req, res) {
+      res.render(view);
+    });
+
     app.get(root + 'login', function(req, res) {
       res.render(view);
     });

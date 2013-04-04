@@ -1,7 +1,6 @@
 var express = require('express')
   , mongoose = require('mongoose')
   , passport = require('passport')
-  , schemas = require('./schemas')
   , models = require('./models')
   , routes = require('./routes')
   , http = require('http')
@@ -26,7 +25,6 @@ app.configure('development', function() {
 });
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/cv');
-schemas.initialize(app, mongoose);
 models.initialize(app, mongoose);
 routes.initialize(app, passport);
 

@@ -2,11 +2,13 @@
 
   "use strict";
 
-  module.exports = function(app, mongoose) {
+  module.exports = function(mongoose) {
 
-    var UserSchema = app.Schemas.User;
-
-    return mongoose.model('User', UserSchema);
+    return new mongoose.Schema({
+      email: String,
+      password: String,
+      access_token: String
+    });
 
   };
 

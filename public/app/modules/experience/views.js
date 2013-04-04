@@ -1,6 +1,6 @@
 define([
   "app",
-  "modules/large-widget/views"
+  "modules/abstract/views"
 ],
 
 function(app, AbstractViews) {

@@ -119,6 +119,10 @@ function(app) {
       this.model.destroy();
     },
 
+    serialize: function() {
+      return this.model.toJSON();
+    },
+
     initialize: function() {
       this.listenTo(this.model, "change", this.render);
       this.listenTo(this.model, "destroy", this.remove);
@@ -156,6 +160,10 @@ function(app) {
       e.preventDefault();
 
       this.remove();
+    },
+
+    serialize: function() {
+      return this.model.toJSON();
     },
 
     afterRender: function() {
