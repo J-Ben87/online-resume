@@ -1,3 +1,60 @@
+/* LAYOUT */
+
+header {
+  padding: 20px 0;
+}
+
+header, footer {
+  background-color: #4783d0;
+  color: #ffffff;
+}
+
+header .media-body h1 {
+  margin: 5px 0;
+}
+
+header .media-body h3 {
+  margin: 0;
+}
+
+#profile-picture {
+  width: 80px;
+}
+
+footer a, footer a:visited {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+footer a:hover, footer a:active {
+  color: #99d9ea;
+}
+
+/* STYLE */
+
+.date {
+  line-height: 40px;
+}
+
+ul.unstyled.dl-like li {
+  margin-left: 10px;
+}
+
+.details {
+  margin-top: 30px;
+}
+
+.icon-like {
+  height: 100%;
+  background: none;
+}
+
+.icon-like-big {
+  width: 20px;
+  margin-top: 0;
+  line-height: 20px;
+}
+
 .ui-state-highlight {
   padding: 19px;
   margin-bottom: 20px;
