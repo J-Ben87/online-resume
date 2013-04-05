@@ -31,6 +31,7 @@
         name: req.body.name,
         flag: req.body.flag,
         keywords: req.body.keywords,
+        is_highlighted: req.body.is_highlighted,
         order: req.body.order
       });
 
@@ -50,6 +51,7 @@
         language.name = req.body.name;
         language.flags = req.body.flags;
         language.keywords = req.body.keywords;
+        language.is_highlighted = req.body.is_highlighted;
         language.order = req.body.order;
 
         return language.save(function(err) {

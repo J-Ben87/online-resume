@@ -44,6 +44,7 @@ function(app, AbstractViews) {
         name: this.$("#name").val(),
         // flag: this.$("#flag").val(),
         keywords: [],
+        is_highlighted: this.$("#is_highlighted").is(":checked"),
         order: this.model.get("order") || app.router.collections.languages.length + 1
       };
 

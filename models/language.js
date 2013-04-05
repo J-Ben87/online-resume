@@ -8,6 +8,7 @@
       name: String,
       flag: String,
       keywords: [ KeywordSchema ],
+      is_highlighted: Boolean,
       order: Number
     });
 
