@@ -1,0 +1,17 @@
+<div class="row-fluid">
+  <div class="span6">
+    <strong>{{{name}}}</strong>
+    <ul class="unstyled dl-like">
+      {{#each keywords}}
+        <li>{{{label}}}</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<button id="edit" class="btn btn-info">Edit</button>
+<button id="delete" class="btn btn-danger">Delete</button>
+
+<div id="form-container"></div>

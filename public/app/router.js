@@ -3,10 +3,11 @@ define([
   "modules/experience",
   "modules/education",
   "modules/language",
+  "modules/hobby",
   "modules/user"
 ],
 
-function(app, Experience, Education, Language, User) {
+function(app, Experience, Education, Language, Hobby, User) {
 
   var Router = Backbone.Router.extend({
 
@@ -15,12 +16,12 @@ function(app, Experience, Education, Language, User) {
       "admin/experiences": "experiences",
       "admin/educations": "educations",
       "admin/languages": "languages",
+      "admin/hobbies": "hobbies",
       "admin/login": "login",
       "admin/logout": "logout"
     },
 
     index: function() {
-
     },
 
     experiences: function() {
@@ -65,6 +66,20 @@ function(app, Experience, Education, Language, User) {
       this.collections.languages.fetch();
     },
 
+    hobbies: function() {
+      this.reset({ route: "hobbies", referer: "admin/hobbies" });
+
+      if (!app.user.isAuthenticated()) {
+        return this.navigate("admin/login", true);
+      }
+
+      app.useLayout("admin-layout").setViews({
+        "#content": new Hobby.Views.List({ collection: this.collections.hobbies })
+      }).render();
+
+      this.collections.hobbies.fetch();
+    },
+
     login: function() {
       this.reset();
 
@@ -101,6 +116,10 @@ function(app, Experience, Education, Language, User) {
         this.collections.languages.reset();
       }
 
+      if (this.collections.hobbies.length) {
+        this.collections.hobbies.reset();
+      }
+
       if (app.layout) {
         app.layout.getViews().each(function(view) {
           view.remove();
@@ -110,7 +129,6 @@ function(app, Experience, Education, Language, User) {
       if (options.referer) {
         this.referer = options.referer;
       }
-
       this.routes.active = options.route;
     },
 
@@ -118,13 +136,15 @@ function(app, Experience, Education, Language, User) {
       this.collections = {
         experiences: new Experience.Collection(),
         educations: new Education.Collection(),
-        languages: new Language.Collection()
+        languages: new Language.Collection(),
+        hobbies: new Hobby.Collection()
       };
 
       app.modules = {
         Experience: Experience,
         Education: Education,
         Language: Language,
+        Hobby: Hobby,
         User: User
       };
 

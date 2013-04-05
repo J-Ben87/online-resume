@@ -19,6 +19,10 @@
       res.render(view);
     });
 
+    app.get(root + 'hobbies', function(req, res) {
+      res.render(view);
+    });
+
     app.get(root + 'login', function(req, res) {
       res.render(view);
     });
