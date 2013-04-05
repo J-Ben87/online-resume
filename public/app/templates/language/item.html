@@ -1,17 +1,6 @@
-<div class="row-fluid">
-  <div class="span6">
-    <strong>{{{name}}}</strong> <img src="/app/img/flags/{{flag}}" class="icon-like icon-like-big">
-    <ul class="unstyled dl-like">
-      {{#each keywords}}
-        <li>{{#if ../is_highlighted}}<i class="icon-star-empty"></i>{{/if}} {{{label}}}</li>
-      {{/each}}
-    </ul>
-  </div>
-</div>
-
-<hr>
-
-<button id="edit" class="btn btn-info">Edit</button>
-<button id="delete" class="btn btn-danger">Delete</button>
-
-<div id="form-container"></div>
+<strong>{{{name}}}</strong> <img src="/app/img/flags/{{flag}}" class="icon-like icon-like-big">
+<ul class="unstyled dl-like">
+  {{#each keywords}}
+    <li>{{#if ../is_highlighted}}<i class="icon-star-empty"></i>{{/if}} {{{label}}}</li>
+  {{/each}}
+</ul>

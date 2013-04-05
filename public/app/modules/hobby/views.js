@@ -5,27 +5,27 @@ define([
 
 function(app, AbstractViews) {
 
-  var Views = {}
+  var Views = { Admin: {} }
     , module = {
-      Views: Views,
+      Views: Views.Admin,
       singular: "hobby",
       plural: "hobbies"
     };
 
-  Views.List = AbstractViews.List.extend({
+  Views.Admin.List = AbstractViews.List.extend({
     module: module,
-    template: "hobby/list",
+    template: "hobby/admin/list",
     id: "hobbies"
   });
 
-  Views.Item = AbstractViews.Item.extend({
+  Views.Admin.Item = AbstractViews.Item.extend({
     module: module,
-    template: "hobby/item"
+    template: "hobby/admin/item"
   });
 
-  Views.Form = AbstractViews.Form.extend({
+  Views.Admin.Form = AbstractViews.Form.extend({
     module: module,
-    template: "hobby/form",
+    template: "hobby/admin/form",
 
     serialize: function() {
       var values = this.model.toJSON();
@@ -60,6 +60,36 @@ function(app, AbstractViews) {
 
     initialize: function() {
       this.model = this.model || new app.modules.Hobby.Model();
+    }
+  });
+
+  Views.List = Backbone.View.extend({
+    template: "hobby/list",
+    tagName: "section",
+    className: "span6",
+    id: "hobbies",
+
+    beforeRender: function() {
+      this.$el.children().remove();
+
+      this.collection.each(function(model) {
+        this.insertView(".row-fluid", new Views.Item({
+          model: model
+        }));
+      }, this);
+    },
+
+    initialize: function() {
+      this.listenTo(this.collection, "reset", this.render);
+    }
+  });
+
+  Views.Item = Backbone.View.extend({
+    template: "hobby/item",
+    className: "span4",
+
+    serialize: function() {
+      return this.model.toJSON();
     }
   });
 

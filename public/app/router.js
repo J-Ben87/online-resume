@@ -22,6 +22,23 @@ function(app, Experience, Education, Language, Hobby, User) {
     },
 
     index: function() {
+      this.reset({ referer: "" });
+
+      app.useLayout("layout").setViews({
+        "#single-column": [
+          new Experience.Views.List({ collection: this.collections.experiences }),
+          new Education.Views.List({ collection: this.collections.educations })
+        ],
+        "#two-columns": [
+          new Language.Views.List({ collection: this.collections.languages }),
+          new Hobby.Views.List({ collection: this.collections.hobbies })
+        ]
+      }).render();
+
+      this.collections.experiences.fetch();
+      this.collections.educations.fetch();
+      this.collections.languages.fetch();
+      this.collections.hobbies.fetch();
     },
 
     experiences: function() {
@@ -32,7 +49,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       }
 
       app.useLayout("admin-layout").setViews({
-        "#content": new Experience.Views.List({ collection: this.collections.experiences })
+        "#content": new Experience.Views.Admin.List({ collection: this.collections.experiences })
       }).render();
 
       this.collections.experiences.fetch();
@@ -46,7 +63,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       }
 
       app.useLayout("admin-layout").setViews({
-        "#content": new Education.Views.List({ collection: this.collections.educations })
+        "#content": new Education.Views.Admin.List({ collection: this.collections.educations })
       }).render();
 
       this.collections.educations.fetch();
@@ -60,7 +77,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       }
 
       app.useLayout("admin-layout").setViews({
-        "#content": new Language.Views.List({ collection: this.collections.languages })
+        "#content": new Language.Views.Admin.List({ collection: this.collections.languages })
       }).render();
 
       this.collections.languages.fetch();
@@ -74,7 +91,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       }
 
       app.useLayout("admin-layout").setViews({
-        "#content": new Hobby.Views.List({ collection: this.collections.hobbies })
+        "#content": new Hobby.Views.Admin.List({ collection: this.collections.hobbies })
       }).render();
 
       this.collections.hobbies.fetch();

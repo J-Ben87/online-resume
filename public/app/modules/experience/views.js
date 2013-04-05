@@ -5,22 +5,22 @@ define([
 
 function(app, AbstractViews) {
 
-  var Views = {}
+  var Views = { Admin: {} }
     , module = {
-      Views: Views,
+      Views: Views.Admin,
       singular: "experience",
       plural: "experiences"
     };
 
-  Views.List = AbstractViews.List.extend({
+  Views.Admin.List = AbstractViews.List.extend({
     module: module,
-    template: "experience/list",
+    template: "experience/admin/list",
     id: "experiences"
   });
 
-  Views.Item = AbstractViews.Item.extend({
+  Views.Admin.Item = AbstractViews.Item.extend({
     module: module,
-    template: "experience/item",
+    template: "experience/admin/item",
 
     serialize: function() {
       var values = this.model.toJSON();
@@ -32,9 +32,9 @@ function(app, AbstractViews) {
     }
   });
 
-  Views.Form = AbstractViews.Form.extend({
+  Views.Admin.Form = AbstractViews.Form.extend({
     module: module,
-    template: "experience/form",
+    template: "experience/admin/form",
 
     serialize: function() {
       var values = this.model.toJSON();
@@ -94,6 +94,40 @@ function(app, AbstractViews) {
 
     initialize: function() {
       this.model = this.model || new app.modules.Experience.Model();
+    }
+  });
+
+  Views.List = Backbone.View.extend({
+    template: "experience/list",
+    tagName: "section",
+    id: "experiences",
+
+    beforeRender: function() {
+      this.$el.children().remove();
+
+      this.collection.each(function(model) {
+        this.insertView(new Views.Item({
+          model: model
+        }));
+      }, this);
+    },
+
+    initialize: function() {
+      this.listenTo(this.collection, "reset", this.render);
+    }
+  });
+
+  Views.Item = Backbone.View.extend({
+    template: "experience/item",
+    className: "well",
+
+    serialize: function() {
+      var values = this.model.toJSON();
+
+      values.started_on = $.format.date(new Date(values.started_on), "MMMM yyyy");
+      values.ended_on = $.format.date(new Date(values.ended_on), "MMMM yyyy");
+
+      return _.extend(values, { has_separator: (this.model.get("project") && this.model.get("company")) });
     }
   });
 

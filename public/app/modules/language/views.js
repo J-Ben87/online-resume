@@ -5,27 +5,27 @@ define([
 
 function(app, AbstractViews) {
 
-  var Views = {}
+  var Views = { Admin: {} }
     , module = {
-      Views: Views,
+      Views: Views.Admin,
       singular: "language",
       plural: "languages"
     };
 
-  Views.List = AbstractViews.List.extend({
+  Views.Admin.List = AbstractViews.List.extend({
     module: module,
-    template: "language/list",
+    template: "language/admin/list",
     id: "languages"
   });
 
-  Views.Item = AbstractViews.Item.extend({
+  Views.Admin.Item = AbstractViews.Item.extend({
     module: module,
-    template: "language/item"
+    template: "language/admin/item"
   });
 
-  Views.Form = AbstractViews.Form.extend({
+  Views.Admin.Form = AbstractViews.Form.extend({
     module: module,
-    template: "language/form",
+    template: "language/admin/form",
 
     serialize: function() {
       var values = this.model.toJSON();
@@ -60,6 +60,36 @@ function(app, AbstractViews) {
 
     initialize: function() {
       this.model = this.model || new app.modules.Language.Model();
+    }
+  });
+
+  Views.List = Backbone.View.extend({
+    template: "language/list",
+    tagName: "section",
+    className: "span6",
+    id: "languages",
+
+    beforeRender: function() {
+      this.$el.children().remove();
+
+      this.collection.each(function(model) {
+        this.insertView(".row-fluid", new Views.Item({
+          model: model
+        }));
+      }, this);
+    },
+
+    initialize: function() {
+      this.listenTo(this.collection, "reset", this.render);
+    }
+  });
+
+  Views.Item = Backbone.View.extend({
+    template: "language/item",
+    className: "span6",
+
+    serialize: function() {
+      return this.model.toJSON();
     }
   });
 

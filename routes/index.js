@@ -21,6 +21,10 @@
     require('./api')(app, passport);
     require('./admin')(app);
 
+    app.get('/', function(req, res) {
+      res.render('index.html');
+    });
+
   };
 
 }(exports));
