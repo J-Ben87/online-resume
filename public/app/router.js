@@ -101,7 +101,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       options = options || {};
 
       if (_.isString(route)) {
-        options.template = route;
+        options.route = route;
       }
 
       if (this.collections.experiences.length) {
@@ -148,7 +148,8 @@ function(app, Experience, Education, Language, Hobby, User) {
         User: User
       };
 
-      this.referer = "admin/educations";
+      this.homepage = "admin/experiences";
+      this.referer = document.location.pathname.slice(1);
 
       app.user = new User.Model();
       app.rememberMe = new User.RememberMe();

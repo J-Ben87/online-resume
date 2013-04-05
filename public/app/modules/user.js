@@ -23,7 +23,7 @@ function(app, Views) {
             app.rememberMe.save(model.toJSON());
           }
 
-          return app.router.navigate(app.router.referer, true);
+          return app.router.navigate((app.router.referer != "admin/login" ? app.router.referer : app.router.homepage), true);
         },
         error: function(model, response, options) {
           return app.trigger("user:login:error", model);
