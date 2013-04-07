@@ -9,6 +9,7 @@
       , EducationSchema =  require('./education')(mongoose, KeywordSchema)
       , LanguageSchema =   require('./language')(mongoose, KeywordSchema)
       , HobbySchema =      require('./hobby')(mongoose, KeywordSchema)
+      , DetailSchema =     require('./detail')(mongoose)
       , UserSchema =       require('./user')(mongoose);
 
     app.Models = {};
@@ -18,6 +19,7 @@
     app.Models.Education =  mongoose.model('Education', EducationSchema),
     app.Models.Language =   mongoose.model('Language', LanguageSchema),
     app.Models.Hobby =      mongoose.model('Hobby', HobbySchema),
+    app.Models.Detail =     mongoose.model('Detail', DetailSchema),
     app.Models.User =       mongoose.model('User', UserSchema)
 
   };

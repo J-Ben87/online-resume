@@ -8,6 +8,7 @@
     require('./educations')(app, passport);
     require('./languages')(app, passport);
     require('./hobbies')(app, passport);
+    require('./detail')(app, passport);
     require('./users')(app, passport);
 
     app.get('/api', function(req, res) {

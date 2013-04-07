@@ -4,10 +4,11 @@ define([
   "modules/education",
   "modules/language",
   "modules/hobby",
+  "modules/detail",
   "modules/user"
 ],
 
-function(app, Experience, Education, Language, Hobby, User) {
+function(app, Experience, Education, Language, Hobby, Detail, User) {
 
   var Router = Backbone.Router.extend({
 
@@ -17,6 +18,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       "admin/educations": "educations",
       "admin/languages": "languages",
       "admin/hobbies": "hobbies",
+      "admin/detail": "detail",
       "admin/login": "login",
       "admin/logout": "logout"
     },
@@ -25,6 +27,7 @@ function(app, Experience, Education, Language, Hobby, User) {
       this.reset({ referer: "" });
 
       app.useLayout("layout").setViews({
+        "#header": new Detail.Views.Header({ model: this.models.detail }),
         "#single-column": [
           new Experience.Views.List({ collection: this.collections.experiences }),
           new Education.Views.List({ collection: this.collections.educations })
@@ -32,13 +35,15 @@ function(app, Experience, Education, Language, Hobby, User) {
         "#two-columns": [
           new Language.Views.List({ collection: this.collections.languages }),
           new Hobby.Views.List({ collection: this.collections.hobbies })
-        ]
+        ],
+        "footer": new Detail.Views.Footer({ model: this.models.detail })
       }).render();
 
       this.collections.experiences.fetch();
       this.collections.educations.fetch();
       this.collections.languages.fetch();
       this.collections.hobbies.fetch();
+      this.models.detail.fetch();
     },
 
     experiences: function() {
@@ -97,6 +102,20 @@ function(app, Experience, Education, Language, Hobby, User) {
       this.collections.hobbies.fetch();
     },
 
+    detail: function() {
+      this.reset({ route: "detail", referer: "admin/detail" });
+
+      if (!app.user.isAuthenticated()) {
+        return this.navigate("admin/login", true);
+      }
+
+      app.useLayout("admin-layout").setViews({
+        "#content": new Detail.Views.Admin.Item({ model: this.models.detail })
+      }).render();
+
+      this.models.detail.fetch();
+    },
+
     login: function() {
       this.reset();
 
@@ -137,6 +156,8 @@ function(app, Experience, Education, Language, Hobby, User) {
         this.collections.hobbies.reset();
       }
 
+      this.models.detail.clear();
+
       if (app.layout) {
         app.layout.getViews().each(function(view) {
           view.remove();
@@ -155,6 +176,10 @@ function(app, Experience, Education, Language, Hobby, User) {
         educations: new Education.Collection(),
         languages: new Language.Collection(),
         hobbies: new Hobby.Collection()
+      };
+
+      this.models = {
+        detail: new Detail.Model()
       };
 
       app.modules = {

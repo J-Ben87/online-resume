@@ -1,0 +1,21 @@
+<section id="contact">
+  <div class="row-fluid">
+    <div class="span6">
+      <h1>Contact</h1>
+      <address>
+        <strong>{{name}}</strong><br>
+        {{{address}}}<br>
+        {{phone}}<br>
+        <a href="mailto:{{email}}">{{email}}</a>
+      </address>
+    </div>
+    <div class="span6">
+      <h1>Details</h1>
+      <p>
+        <strong>Nationality</strong>: {{country}} {{#if flag}}<img src="/app/img/flags/{{flag}}" class="icon-like-big">{{/if}}<br>
+        <strong>Working Visa</strong>: {{visa}}<br>
+        <strong>Driving License</strong>: {{driving_license}}
+      </p>
+    </div>
+  </div>
+</section>

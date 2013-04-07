@@ -9,16 +9,12 @@ header, footer {
   color: #ffffff;
 }
 
-header .media-body h1 {
+header h1 {
   margin: 5px 0;
 }
 
-header .media-body h3 {
+header h3 {
   margin: 0;
-}
-
-#profile-picture {
-  width: 80px;
 }
 
 footer a, footer a:visited {

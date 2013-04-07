@@ -1,0 +1,64 @@
+<div class="control-group">
+  <label class="control-label" for="name">Name</label>
+  <div class="controls">
+    <input type="text" id="name" value="{{name}}" placeholder="Your name">
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="title">Title</label>
+  <div class="controls">
+    <input type="text" id="title" value="{{title}}" placeholder="Title of the website">
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="subtitle">Subtitle</label>
+  <div class="controls">
+    <input type="text" id="subtitle" value="{{subtitle}}" placeholder="Subtitle of the website">
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="phone">Phone number</label>
+  <div class="controls">
+    <input type="text" id="phone" value="{{phone}}" placeholder="Your phone number">
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="email">Email</label>
+  <div class="controls">
+    <input type="text" id="email" value="{{email}}" placeholder="Your email address">
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="address">Address</label>
+  <div class="controls">
+    <textarea id="address" placeholder="The place where you live">{{address}}</textarea>
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="culture">Nationality</label>
+  <div class="controls">
+    <select id="culture">
+      {{#each cultures}}
+        <option value="{{culture}}" {{#is_selected culture ../culture}}selected="selected"{{/is_selected}}>{{country}}</option>
+      {{/each}}
+    </select>
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="visa">Visa</label>
+  <div class="controls">
+    <input type="text" id="visa" value="{{visa}}" placeholder="The kind of Visa you have">
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="driving_license">Driving License</label>
+  <div class="controls">
+    <input type="text" id="driving_license" value="{{driving_license}}" placeholder="The kind of driving license you have">
+  </div>
+</div>
+<div class="control-group">
+  <div class="controls">
+    <button type="submit" id="save" class="btn btn-primary">Save</button>
+    <button id="cancel" class="btn">Cancel</button>
+  </div>
+</div>

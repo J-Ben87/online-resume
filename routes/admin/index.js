@@ -23,6 +23,10 @@
       res.render(view);
     });
 
+    app.get(root + 'detail', function(req, res) {
+      res.render(view);
+    });
+
     app.get(root + 'login', function(req, res) {
       res.render(view);
     });

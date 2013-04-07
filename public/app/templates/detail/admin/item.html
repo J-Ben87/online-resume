@@ -1,0 +1,34 @@
+<header>
+  <h1>{{title}}</h1>
+  <h3>{{subtitle}}</h3>
+</header>
+
+<hr>
+
+<footer>
+  <div class="row-fluid">
+    <div class="span6">
+      <h1>Contact</h1>
+      <address>
+        <strong>{{title}}</strong><br>
+        {{{address}}}<br>
+        {{phone}}<br>
+        <a href="mailto:{{email}}">{{email}}</a>
+      </address>
+    </div>
+    <div class="span6">
+      <h1>Details</h1>
+      <p>
+        <strong>Nationality</strong>: {{country}} {{#if flag}}<img src="/app/img/flags/{{flag}}" class="icon-like-big">{{/if}}<br>
+        <strong>Working Visa</strong>: {{visa}}<br>
+        <strong>Driving License</strong>: {{driving_license}}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<hr>
+
+<button id="edit" class="btn btn-info">Edit</button>
+
+<div id="form-container"></div>
