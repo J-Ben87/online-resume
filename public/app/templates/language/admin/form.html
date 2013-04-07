@@ -3,7 +3,7 @@
   <div class="controls">
     <select id="culture">
       {{#each cultures}}
-        <option value="{{id}}" {{#is_selected id ../culture}}selected="selected"{{/is_selected}}>{{language}} ({{country}})</option>
+        <option value="{{culture}}" {{#is_selected culture ../culture}}selected="selected"{{/is_selected}}>{{language}} ({{country}})</option>
       {{/each}}
     </select>
   </div>

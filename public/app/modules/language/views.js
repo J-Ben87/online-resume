@@ -47,7 +47,7 @@ function(app, AbstractViews) {
       };
 
       _.extend(values, _.find(app.cultures, function(culture) {
-        return this.$("#culture").val() == culture.id;
+        return this.$("#culture").val() == culture.culture;
       }));
 
       var keywords = this.model.get("keywords");
