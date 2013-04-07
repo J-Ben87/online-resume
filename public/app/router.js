@@ -209,6 +209,12 @@ function(app, Experience, Education, Language, Hobby, Detail, User) {
         }
       });
 
+      Handlebars.registerHelper("is_not_empty", function(array, options) {
+        if (array.length && _.reject(array, function(item) { return item.label == ""; }).length) {
+          return options.fn(this);
+        }
+      });
+
       Handlebars.registerHelper("is_selected", function(value, origin, options) {
         if (value == origin) {
           return options.fn(this);

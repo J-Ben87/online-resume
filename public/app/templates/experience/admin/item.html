@@ -12,7 +12,7 @@
 <p>{{{description}}}</p>
 
 <div class="row-fluid details">
-  {{#if technologies}}
+  {{#is_not_empty technologies}}
     <div class="span2">
       <strong>Technologies</strong>
       <ul class="unstyled dl-like">
@@ -21,9 +21,9 @@
         {{/each}}
       </ul>
     </div>
-  {{/if}}
+  {{/is_not_empty}}
 
-  {{#if frameworks}}
+  {{#is_not_empty frameworks}}
     <div class="span2">
       <strong>Frameworks - Libraries</strong>
       <ul class="unstyled dl-like">
@@ -32,9 +32,9 @@
         {{/each}}
       </ul>
     </div>
-  {{/if}}
+  {{/is_not_empty}}
 
-  {{#if softwares}}
+  {{#is_not_empty softwares}}
     <div class="span2">
       <strong>Softwares</strong>
       <ul class="unstyled dl-like">
@@ -43,9 +43,9 @@
         {{/each}}
       </ul>
     </div>
-  {{/if}}
+  {{/is_not_empty}}
 
-  {{#if tools}}
+  {{#is_not_empty tools}}
     <div class="span2">
       <strong>Tools</strong>
       <ul class="unstyled dl-like">
@@ -54,9 +54,9 @@
         {{/each}}
       </ul>
     </div>
-  {{/if}}
+  {{/is_not_empty}}
 
-  {{#if keywords}}
+  {{#is_not_empty keywords}}
     <div class="span2">
       <strong>Keywords</strong>
       <ul class="unstyled dl-like">
@@ -65,7 +65,7 @@
         {{/each}}
       </ul>
     </div>
-  {{/if}}
+  {{/is_not_empty}}
 </div>
 
 <hr>
