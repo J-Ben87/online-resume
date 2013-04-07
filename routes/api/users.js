@@ -16,15 +16,15 @@
       });
     });
 
-    // app.get('/api/users', passport.authenticate('bearer', { session: false }), function(req, res) {
-    //   return UserModel.find(function(err, users) {
-    //     if (!err) {
-    //       return res.send(users);
-    //     } else {
-    //       return console.log(err);
-    //     }
-    //   });
-    // });
+    app.get('/api/users', function(req, res) {
+      return UserModel.find(function(err, users) {
+        if (!err) {
+          return res.send(users);
+        } else {
+          return console.log(err);
+        }
+      });
+    });
 
     // app.get('/api/users/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
     //   return UserModel.findById(req.params.id, function(err, user) {
@@ -36,23 +36,23 @@
     //   });
     // });
 
-    // app.post('/api/users', passport.authenticate('bearer', { session: false }), function(req, res) {
-    //   var user = new UserModel({
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //     access_token: req.body.access_token
-    //   });
+    app.post('/api/users', function(req, res) {
+      var user = new UserModel({
+        email: req.body.email,
+        password: req.body.password,
+        access_token: req.body.access_token
+      });
 
-    //   user.save(function(err) {
-    //     if (!err) {
-    //       return console.log('User created');
-    //     } else {
-    //       return console.log(err);
-    //     }
-    //   });
+      user.save(function(err) {
+        if (!err) {
+          return console.log('User created');
+        } else {
+          return console.log(err);
+        }
+      });
 
-    //   return res.send(user);
-    // });
+      return res.send(user);
+    });
 
     // app.put('/api/users/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
     //   return UserModel.findById(req.params.id, function(err, user) {
