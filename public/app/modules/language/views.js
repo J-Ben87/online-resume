@@ -28,7 +28,7 @@ function(app, AbstractViews) {
     template: "language/admin/form",
 
     serialize: function() {
-      var values = this.model.toJSON();
+      var values = _.extend(this.model.toJSON(), { cultures: app.cultures });
 
       var keywords = "";
       _.each(values.keywords, function(keyword, i) {
@@ -41,12 +41,14 @@ function(app, AbstractViews) {
 
     unserialize: function() {
       var values = {
-        name: this.$("#name").val(),
-        // flag: this.$("#flag").val(),
         keywords: [],
         is_highlighted: this.$("#is_highlighted").is(":checked"),
         order: this.model.get("order") || app.router.collections.languages.length + 1
       };
+
+      _.extend(values, _.find(app.cultures, function(culture) {
+        return this.$("#culture").val() == culture.id;
+      }));
 
       var keywords = this.model.get("keywords");
       _.each(this.$("#keywords").val().split("\n"), function(label) {

@@ -28,7 +28,9 @@
 
     app.post('/api/languages', passport.authenticate('bearer', { session: false }), function(req, res) {
       var language = new LanguageModel({
-        name: req.body.name,
+        culture: req.body.culture,
+        country: req.body.country,
+        language: req.body.language,
         flag: req.body.flag,
         keywords: req.body.keywords,
         is_highlighted: req.body.is_highlighted,
@@ -48,8 +50,10 @@
 
     app.put('/api/languages/:id', passport.authenticate('bearer', { session: false }), function(req, res) {
       return LanguageModel.findById(req.params.id, function(err, language) {
-        language.name = req.body.name;
-        language.flags = req.body.flags;
+        language.culture = req.body.culture;
+        language.country = req.body.country;
+        language.language = req.body.language;
+        language.flag = req.body.flag;
         language.keywords = req.body.keywords;
         language.is_highlighted = req.body.is_highlighted;
         language.order = req.body.order;

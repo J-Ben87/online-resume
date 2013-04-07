@@ -1,13 +1,11 @@
 <div class="control-group">
-  <label class="control-label" for="name">Language</label>
+  <label class="control-label" for="culture">Language</label>
   <div class="controls">
-    <input type="text" id="name" value="{{name}}" placeholder="Spoken language">
-  </div>
-</div>
-<div class="control-group">
-  <label class="control-label" for="flag">Flag</label>
-  <div class="controls">
-    <input type="flag" id="flag">
+    <select id="culture">
+      {{#each cultures}}
+        <option value="{{id}}" {{#is_selected id ../culture}}selected="selected"{{/is_selected}}>{{language}} ({{country}})</option>
+      {{/each}}
+    </select>
   </div>
 </div>
 <div class="control-group">

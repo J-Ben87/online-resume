@@ -183,6 +183,12 @@ function(app, Experience, Education, Language, Hobby, User) {
           return options.fn(this);
         }
       });
+
+      Handlebars.registerHelper("is_selected", function(value, origin, options) {
+        if (value == origin) {
+          return options.fn(this);
+        }
+      });
     }
 
   });
