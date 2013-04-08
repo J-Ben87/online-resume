@@ -25,6 +25,10 @@
       res.render('index.html');
     });
 
+    app.get('/downloads/resume - benoit jouhaud.pdf', function(req, res) {
+      res.sendFile('/downloads/resume - benoit jouhaud.pdf');
+    });
+
   };
 
 }(exports));
