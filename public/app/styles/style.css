@@ -9,6 +9,19 @@ header, footer {
   color: #ffffff;
 }
 
+@media (max-width: 767px) {
+  header, footer {
+    padding: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+  }
+
+  footer {
+    margin-bottom: 20px;
+  }
+}
+
 header h1 {
   margin: 5px 0;
 }
