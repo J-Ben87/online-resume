@@ -42,6 +42,8 @@ function(app, AbstractViews) {
       values.started_on = (values.started_on ? $.format.date(new Date(values.started_on), "yyyy-MM") : "");
       values.ended_on = (values.ended_on ? $.format.date(new Date(values.ended_on), "yyyy-MM") : "");
 
+      values.order = this.model.get("order") || app.router.collections.educations.length + 1;
+
       var highlights = "";
       _.each(values.highlights, function(highlight, i) {
         highlights += (i > 0 ? "\n" : "") + highlight.label;
@@ -61,7 +63,7 @@ function(app, AbstractViews) {
         location: this.$("#location").val(),
         highlights: [],
         description: this.$("#description").val(),
-        order: this.model.get("order") || app.router.collections.educations.length + 1
+        order: this.$("#order").val()
       };
 
       var highlights = this.model.get("highlights");

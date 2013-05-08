@@ -42,6 +42,8 @@ function(app, AbstractViews) {
       values.started_on = (values.started_on ? $.format.date(new Date(values.started_on), "yyyy-MM") : "");
       values.ended_on = (values.ended_on ? $.format.date(new Date(values.ended_on), "yyyy-MM") : "");
 
+      values.order = this.model.get("order") || app.router.collections.experiences.length + 1;
+
       var attributes = ["highlights", "technologies", "frameworks", "softwares", "tools", "keywords"];
       _.each(attributes, function(attribute) {
 
@@ -72,7 +74,7 @@ function(app, AbstractViews) {
         softwares: [],
         tools: [],
         keywords: [],
-        order: this.model.get("order") || app.router.collections.experiences.length + 1
+        order: this.$("#order").val()
       };
 
       var self = this;
